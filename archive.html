@@ -1,0 +1,76 @@
+<?php
+
+include '/web/gamut/kint/Kint.php';
+// path to alert site
+$alertSitePath = '/web/sites/depts/alert/web';
+
+$archive = file_get_contents($alertSitePath . '/app/json/alert-archive.json');
+$archive = json_decode($archive);
+//d($archive);
+
+if ($archive !== null){
+    $archiveAlerts = '<div class="u-AlertGroup">';
+  
+    foreach($archive as $incident){
+      //d($incident);
+       $archiveAlerts .= '<div class="u-AlertList u-AlertList--allClear">';
+        $archiveAlerts .= '<h3 class="u-AlertList__title">May 8, 2017</h3>';	
+
+        foreach($incident as $message){
+           //d($message);
+            //foreach($message as $m){
+                $archiveAlerts .= '<div class="article hentry hnews item u-AlertListItem">';
+                $archiveAlerts .= '<article>';
+                $archiveAlerts .= '<h3 class="entry-title u-AlertListItem__title">' . $message->title . '</h3>';
+                $archiveAlerts .= '<p class="entry-summary u-AlertListItem__summary">' . $message->description . '</p>';
+                $archiveAlerts .= '<b class="u-AlertListItem__label u-AlertListItem__label--dateline">';
+                $archiveAlerts .= '<b class="time u-AlertListItem__label--dateline__postedDate"><time class="updated" datetime="' . $message->dcDate . '" pubdate="">' . $message->time . '<br>' . $message->date . '</time></b>';
+                $archiveAlerts .= '</b>';
+                $archiveAlerts .= '</article>';
+                $archiveAlerts .= '</div>';
+            //}
+        }
+        $archiveAlerts .= '</div>';
+    }
+    $archiveAlerts .= '</div>';
+}
+else{
+    $archiveAlerts = '';
+}
+?>
+<!DOCTYPE html>
+<html class="u-pageHome" dir="ltr" id="page" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport">        
+        <title>Vassar Emergency Alert</title> 
+        <link href="/assets/css/site.css" rel="stylesheet">
+        <link href="/app/alert.css" rel="stylesheet">        
+    </head>
+    <body>
+        <div class="u-lHeader">
+            <header role="banner">
+                <div class="u-Masthead">
+                    <a class="u-Masthead__siteName--link" href="/">
+                    <h1 class="u-Masthead__vassar"><b class="u-Masthead__ID"><img src="/assets/images/vassar-logo.png" width="2337" height="416" alt="Vassar College"/></b><b class="ac-hiddenVisually">Vassar</b></h1>
+                    <h2 class="u-Masthead__siteName">Emergency Alert</h2>
+                    </a>
+                </div>
+            </header>
+        </div>
+        <div class="u-lMain">
+            <div class="u-lContent">
+            <main>
+                <h3 class="u-pageTitle">All Cleared Alerts</h3>
+                <?php echo $archiveAlerts; ?>
+                <p style="text-align: center"><a href="index.html" title="Current Alerts"><strong>Current Alerts</strong></a></p>
+            </main>
+            </div>
+            <div class="u-lFooter">
+                <footer>
+                    <div class="u-VCard u-VCard--site vcard"><b class="name fn u-VCard__fn u-VCard__item u-VCard__org">Vassar College</b><div class="adr u-VCard__adr"><b class="street-address u-VCard__item">124 Raymond Avenue</b><b class="u-VCard__adr2">, <b class="locality u-VCard__item">Poughkeepsie</b>,<b class="region"> New York</b><b class="postal-code u-VCard__item"> 12604</b></b></div><ul class="u-VCard__info"><li class="u-List__itemContainer">© Vassar College</li></ul></div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

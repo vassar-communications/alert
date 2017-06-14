@@ -1,0 +1,48 @@
+<?php
+namespace gamut;
+
+include '/web/gamut/kint/Kint.php';
+
+include '/web/gamut/gamut/views/viewAlert.php';
+$alert = new viewAlert;
+?>
+<!DOCTYPE html>
+<html class="u-pageHome" dir="ltr" id="page" lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport">        
+        <title>Vassar Emergency Alert</title> 
+        <link href="/assets/css/site.css" rel="stylesheet">
+        <link href="/app/alert.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="u-lHeader">
+            <header role="banner">
+                <div class="u-Masthead">
+                    <a class="u-Masthead__siteName--link" href="/">
+                    <h1 class="u-Masthead__vassar"><b class="u-Masthead__ID"><img src="/assets/images/vassar-logo.png" width="2337" height="416" alt="Vassar College"/></b><b class="ac-hiddenVisually">Vassar</b></h1>
+                    <h2 class="u-Masthead__siteName">Emergency Alert</h2>
+                    </a>
+                </div>
+            </header>
+        </div>
+        <div class="u-lMain">
+            <div class="u-lContent">
+                <main>
+                    <p style="text-align: center"><em>This page refreshes every 5 seconds</em></p>       
+                    <div class="alert">
+                        <?php //echo $alertHTML;?>
+                        <?php echo $alert->__toString();?>
+                    </div>
+                    <p style="text-align: center"><a href="archive.html" title="Archived Alerts"><strong>Archived Alerts</strong></a></p>
+	            </main>
+        	</div>
+            <div class="u-lFooter">
+                <footer>
+                    <div class="u-VCard u-VCard--site vcard"><b class="name fn u-VCard__fn u-VCard__item u-VCard__org">Vassar College</b><div class="adr u-VCard__adr"><b class="street-address u-VCard__item">124 Raymond Avenue</b><b class="u-VCard__adr2">, <b class="locality u-VCard__item">Poughkeepsie</b>,<b class="region"> New York</b><b class="postal-code u-VCard__item"> 12604</b></b></div><ul class="u-VCard__info"><li class="u-List__itemContainer">© Vassar College</li></ul></div>
+                </footer>
+            </div>
+        </div>
+        <script src="app/alert.js"></script>
+    </body>
+</html>
